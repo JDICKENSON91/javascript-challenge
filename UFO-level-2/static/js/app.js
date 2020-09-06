@@ -32,23 +32,45 @@ form.on("submit", runfilters);
 //Create the function
 function runfilters() {
 
-
     //remove the current data from tbody
     d3.select("tbody").html("");
 
     //Don't refresh the page
     d3.event.preventDefault();
 
-    //Get teh date in the filter box and store it
+
+    //Set the filter keywords to variables and make them all lowercase
     var FilterDate = d3.select("#datetime").property("value");
-    console.log(FilterDate);
 
-    //Filter the table data by the FilterDate varuiable
+    var FilterCountry = d3.select("#country").property("value").toLowerCase();
 
-    var FilteredData = tableData.filter(record => record.datetime === FilterDate);
-    console.log(filteredData);
+    var FilterState = d3.select("#state").property("value").toLowerCase();
 
-    // Output the table by filtered date
+    var FilterCity = d3.select("#city").property("value").toLowerCase();
+
+    var FilterShape = d3.select("#shape").property("value").toLowerCase();
+
+    //Select filters based on inputs
+    FilteredData = tableData;
+
+    if (FilterDate) {
+    FilteredData = FilteredData.filter(record => record.datetime === FilterDate);
+    }
+    if (FilterCountry) {
+    FilteredData = FilteredData.filter(record => record.country === FilterCountry);
+    }
+    if (FilterState) {
+    FilteredData = FilteredData.filter(record => record.state === FilterState);
+    }
+    if (FilterCity) {
+    FilteredData = FilteredData.filter(record => record.city === FilterCity);
+    }
+    if (FilterShape) {
+    FilteredData = FilteredData.filter(record => record.shape === FilterShape);
+    }
+
+    //Re-Enter the table based on Filters
+
     FilteredData.forEach((report) => {
         var row = tbody.append('tr');
 
@@ -58,10 +80,7 @@ function runfilters() {
             cell.text(value);
         });
     });
-
 }
-
-
 
 
 
