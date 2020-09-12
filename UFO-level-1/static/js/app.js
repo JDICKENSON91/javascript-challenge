@@ -46,7 +46,7 @@ function runfilters() {
     //Filter the table data by the FilterDate varuiable
 
     var FilteredData = tableData.filter(record => record.datetime === FilterDate);
-    console.log(filteredData);
+    console.log(FilteredData);
 
     // Output the table by filtered date
     FilteredData.forEach((report) => {
